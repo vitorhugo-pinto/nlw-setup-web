@@ -1,12 +1,12 @@
 import dayjs from "dayjs";
 
 export function datesFromNewYearUntilNow() {
-  const fisrtDayOfTheYear = dayjs().startOf("year");
+  const firstDayOfTheYear = dayjs().startOf("year");
   const today = new Date();
 
   const dates = [];
   // compareDate will behave as a counter
-  let compareDate = fisrtDayOfTheYear;
+  let compareDate = firstDayOfTheYear;
 
   while (compareDate.isBefore(today)) {
     dates.push(compareDate.toDate());

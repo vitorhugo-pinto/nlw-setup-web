@@ -1,6 +1,9 @@
+import { datesFromNewYearUntilNow } from "../utils/dates-from-newyear-until-now";
 import { DailyHabit } from "./DailyHabits";
 
 const weekDays = ["D", "S", "T", "Q", "Q", "S", "S"];
+
+const datesFromDayOne = datesFromNewYearUntilNow();
 
 export function SummaryTable() {
   return (
@@ -18,7 +21,9 @@ export function SummaryTable() {
         })}
       </div>
       <div className="grid grid-rows-7 grid-flow-col gap-3">
-        <DailyHabit />
+        {datesFromDayOne.map((date) => {
+          return <DailyHabit key={date.toDateString()} />;
+        })}
       </div>
     </div>
   );
