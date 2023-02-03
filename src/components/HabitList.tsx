@@ -15,9 +15,10 @@ type HabitListData = {
 
 interface HabitListProps {
   date: Date;
+  onToggleCompletedHabits: (completed: number) => void;
 }
 
-export function HabitList({ date }: HabitListProps) {
+export function HabitList({ date, onToggleCompletedHabits }: HabitListProps) {
   const [habitListData, setHabitListData] = useState<HabitListData>();
 
   const params = new URLSearchParams([["date", date.toISOString()]]);
@@ -46,6 +47,8 @@ export function HabitList({ date }: HabitListProps) {
       possibleHabits: habitListData!.possibleHabits,
       completedHabits,
     });
+
+    onToggleCompletedHabits(completedHabits.length);
   }
 
   const isPastDate = dayjs(date).endOf("day").isBefore(new Date());
