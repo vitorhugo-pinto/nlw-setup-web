@@ -28,6 +28,26 @@ export function HabitList({ date }: HabitListProps) {
     });
   }, []);
 
+  async function handleToggleHabit(habitId: string) {
+    await api.patch(`/habits/${habitId}/toggle`);
+
+    const isHabitCompleted = habitListData!.completedHabits.includes(habitId);
+
+    let completedHabits: string[] = [];
+
+    if (isHabitCompleted) {
+      completedHabits = habitListData!.completedHabits.filter(
+        (id) => id !== habitId
+      );
+    } else {
+      completedHabits = [...habitListData!.completedHabits, habitId];
+    }
+    setHabitListData({
+      possibleHabits: habitListData!.possibleHabits,
+      completedHabits,
+    });
+  }
+
   const isPastDate = dayjs(date).endOf("day").isBefore(new Date());
 
   return (
@@ -36,7 +56,8 @@ export function HabitList({ date }: HabitListProps) {
         return (
           <Checkbox.Root
             key={habit.id}
-            defaultChecked={habitListData.completedHabits.includes(habit.id)}
+            onCheckedChange={() => handleToggleHabit(habit.id)}
+            checked={habitListData.completedHabits.includes(habit.id)}
             disabled={isPastDate}
             className="flex items-center gap-3 group"
           >
