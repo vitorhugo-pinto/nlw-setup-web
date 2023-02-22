@@ -32,7 +32,7 @@ export function DailyHabit({
     <Popover.Root>
       <Popover.Trigger
         className={clsx(
-          "w-10 h-10 bg-zinc-900 border-2 border-zinc-800 rounded-lg",
+          "w-10 h-10 bg-zinc-900 border-2 border-zinc-800 rounded-lg transition-colors",
           {
             "bg-violet-500 border-violet-400": percentageCompletion >= 80,
             "bg-violet-600 border-violet-500":
