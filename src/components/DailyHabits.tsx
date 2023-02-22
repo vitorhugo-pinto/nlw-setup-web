@@ -7,29 +7,25 @@ import { ProgressBar } from "./ProgressBar";
 
 interface DailyHabitProps {
   date: Date;
-  completed?: number;
+  initialCompleted?: number;
   total?: number;
 }
 
 export function DailyHabit({
-  completed = 0,
+  initialCompleted = 0,
   total = 0,
   date,
 }: DailyHabitProps) {
   const dateToDisplay = dayjs(date).format("MMM-DD");
   const weekDayNameToDisplay = dayjs(date).format("dddd");
 
-  const initialPercentageCompletion =
+  const [completed, setCompleted] = useState(initialCompleted);
+
+  const percentageCompletion =
     total > 0 ? Math.round((completed / total) * 100) : 0;
 
-  const [percentageCompletion, setPercentageCompletion] = useState(
-    initialPercentageCompletion
-  );
-
   function handleCompletedHabits(completed: number) {
-    const newPercentageCompletion = Math.round((completed / total) * 100);
-
-    setPercentageCompletion(newPercentageCompletion);
+    setCompleted(completed);
   }
 
   return (

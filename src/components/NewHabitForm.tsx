@@ -18,8 +18,6 @@ export function NewHabitForm() {
   const [weekDaysForm, setWeekDaysForm] = useState<number[]>([]);
 
   function createNewHabit(event: FormEvent) {
-    event.preventDefault();
-
     // TODO: better input validation
     if (!title || weekDaysForm.length === 0) {
       return;

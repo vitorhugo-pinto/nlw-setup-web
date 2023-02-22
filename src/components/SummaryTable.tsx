@@ -39,7 +39,7 @@ export function SummaryTable() {
         })}
       </div>
       <div className="grid grid-rows-7 grid-flow-col gap-3">
-        {summary.length > 0 &&
+        {summary.length &&
           datesFromDayOne.map((date) => {
             const isDateInSummary = summary.find((day) => {
               return dayjs(date).isSame(day.date, "day");
@@ -49,7 +49,7 @@ export function SummaryTable() {
               <DailyHabit
                 key={date.toString()}
                 date={date}
-                completed={isDateInSummary?.completed}
+                initialCompleted={isDateInSummary?.completed}
                 total={isDateInSummary?.total}
               />
             );
